@@ -1,0 +1,32 @@
+# IntelliJ IDEA files
+.idea/
+.intellijPlatform
+*.iml
+out/
+gen/
+*.ipr
+*.iws
+
+# Gradle files
+.gradle/
+build/
+
+# Kotlin / Java compile files
+*.class
+*.log
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Misc
+.agents/
+/bin/
+*.hprof

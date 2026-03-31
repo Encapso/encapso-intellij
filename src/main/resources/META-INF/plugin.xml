@@ -1,0 +1,66 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>io.github.encapso.encapso-intellij</id>
+
+    <!-- Public plugin name should be written in Title Case.
+     Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-name -->
+    <name>Encapso</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor url="https://www.yourcompany.com">YourCompany</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-description -->
+    <description><![CDATA[
+    Architectural validation and navigation for the Encapso framework.
+    Provides real-time inspections for @Component placement and delegation rules.
+    ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.java</depends>
+
+    <!-- Extensions defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+
+        <projectService
+                serviceImplementation="io.github.encapso.intellij.service.EncapsoBoundaryService"/>
+
+        <localInspection
+                language="JAVA"
+                displayName="Component interface enforcement"
+                groupPath="Encapso"
+                groupName="Architectural"
+                enabledByDefault="true"
+                level="ERROR"
+                implementationClass="io.github.encapso.intellij.inspection.ComponentPlacementInspection"/>
+
+        <localInspection
+                language="JAVA"
+                displayName="Static method delegation block"
+                groupPath="Encapso"
+                groupName="Architectural"
+                enabledByDefault="true"
+                level="ERROR"
+                implementationClass="io.github.encapso.intellij.inspection.StaticDelegationInspection"/>
+
+        <localInspection
+                language="JAVA"
+                displayName="Encapso architectural enforcement"
+                groupPath="Encapso"
+                groupName="Architectural"
+                enabledByDefault="true"
+                level="ERROR"
+                implementationClass="io.github.encapso.intellij.inspection.ArchitecturalEnforcementInspection"/>
+
+        <completion.contributor
+                language="JAVA"
+                implementationClass="io.github.encapso.intellij.completion.EncapsoCompletionContributor"
+                order="first, before java"/>
+
+        <postStartupActivity implementation="io.github.encapso.intellij.startup.EncapsoExclusionActivity"/>
+    </extensions>
+
+</idea-plugin>
