@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.encapso"
-version = "1.0.0-SNAPSHOT"
+version = "1.0.0-beta.1-SNAPSHOT"
 
 // Set the JVM language level used to build the project.
 kotlin {
@@ -13,8 +13,15 @@ kotlin {
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/Encapso/*")
+        credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+    }
+    mavenLocal()
     intellijPlatform {
         defaultRepositories()
     }
